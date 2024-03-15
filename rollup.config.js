@@ -15,7 +15,7 @@ export default {
     name: null, // ensure anonymous System.register
     file: "dist/Chef-carousel.js",
   },
-  external: ["@Chef/utility", "rxjs"],
+  external: ["@Chef/utility", "rxjs", "single-spa"],
   plugins: [
     css({ output: 'public/build/vendor.css' }),
     svelte({

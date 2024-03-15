@@ -5,4 +5,12 @@ const svelteLifecycles = singleSpaSvelte({
   component: App,
 });
 
-export const { bootstrap, mount, unmount } = svelteLifecycles;
+export let mountParcel = undefined
+export const bootstrap = [
+  (props) => {
+    mountParcel = props.mountParcel
+    return Promise.resolve()
+  }
+]
+
+export const { mount, unmount } = svelteLifecycles;

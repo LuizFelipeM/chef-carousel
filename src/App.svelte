@@ -5,6 +5,8 @@
   import { onMount } from "svelte";
   import { api, state, routes } from "@Chef/utility";
   import _ from "lodash";
+  import Card from "./components/Card/Card.svelte";
+  import VanillaCard from "./components/VanillaCard/VanillaCard.svelte";
 
   const options = {
     rewind: true,
@@ -56,44 +58,7 @@
     {#each recipesAndStars as [recipe, stars], i}
       <SplideSlide>
         <div class="is-flex">
-          <div class="card px-2 mx-3 my-6">
-            <div class="card-image">
-              <!-- svelte-ignore a11y-missing-attribute -->
-              <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <a on:click={onClick(recipe)}>
-                <figure class="image is-4by3">
-                  <img src={recipe?.image} alt={`${recipe?.title} image`} />
-                </figure>
-              </a>
-            </div>
-            <div class="card-content">
-              <!-- svelte-ignore a11y-missing-attribute -->
-              <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <a class="title is-4 two-lines" on:click={onClick(recipe)}>
-                {recipe?.title}
-              </a>
-
-              <div class="content">
-                <div class="columns is-gapless m-0">
-                  {#each stars as className}
-                    <span>
-                      <i class={className} />
-                    </span>
-                  {/each}
-                </div>
-                <p class="three-lines">
-                  {@html recipe?.summary}
-                </p>
-                <div class="tags">
-                  {#if recipe?.dishTypes}
-                    {#each recipe?.dishTypes?.splice(0, 2) as tag}
-                      <span class="tag is-light">{tag}</span>
-                    {/each}
-                  {/if}
-                </div>
-              </div>
-            </div>
-          </div>
+          <Card {recipe} {stars} onClick={onClick(recipe)} />
         </div>
       </SplideSlide>
     {/each}
@@ -196,6 +161,16 @@
   </div>
 {/if}
 
+<VanillaCard
+  className="px-2 mx-3 my-6"
+  title="Lemon Drop Jello Shots"
+  image="https://spoonacular.com/recipeImages/649625-556x370.jpg"
+  onClick={() => console.log("click")}
+  stars={new Array(5).fill("fa-solid fa-star")}
+  summary="Lemon Drop Jello Shots is a <b>gluten free, dairy free, and fodmap friendly</b> side dish. This recipe serves 4. One serving contains <b>177 calories</b>, <b>4g of protein</b>, and <b>1g of fat</b>. For <b>$1.32 per serving</b>, this recipe <b>covers 8%</b> of your daily requirements of vitamins and minerals. 4 people were glad they tried this recipe. It is brought to you by Foodista. A mixture of lemon vodka, lemon jello, sugar, and a handful of other ingredients are all it takes to make this recipe so tasty. From preparation to the plate, this recipe takes roughly <b>45 minutes</b>. All things considered, we decided this recipe <b>deserves a spoonacular score of 35%</b>. This score is rather bad. <a href='https://spoonacular.com/recipes/lemon-cake-jello-shots-959266'>Lemon Cake Jello Shots</a>, <a href='https://spoonacular.com/recipes/lemon-drop-martini-jelly-shots-53439'>Lemon Drop Martini Jelly Shots</a>, and <a href='https://spoonacular.com/recipes/margarita-jello-shots-of-the-jello-masters-147346'>Margarita Jello Shots of the Jello Masters</a> are very similar to this recipe."
+  tags={["side dish"]}
+/>
+
 <style>
   .skeleton .message-header {
     background-color: #e2e2e2;
@@ -209,26 +184,5 @@
     to {
       background-color: hsl(0, 5%, 78%);
     }
-  }
-
-  .card a.title {
-    line-height: 1.5rem;
-    min-height: 3rem;
-  }
-
-  .two-lines {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-
-  .three-lines {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
   }
 </style>
