@@ -6,7 +6,9 @@
   import { api, state, routes } from "@Chef/utility";
   import _ from "lodash";
   import Card from "./components/Card/Card.svelte";
+  import SkeletonCard from "./components/SkeletonCard/SkeletonCard.svelte";
 
+  const recipesQty = 16;
   const options = {
     rewind: true,
     perPage: 4,
@@ -19,10 +21,10 @@
       let recipes = [];
 
       if (recipe)
-        recipes.push(...(await api.recipes.getSimilar(recipe.id, 16)));
+        recipes.push(...(await api.recipes.getSimilar(recipe.id, recipesQty)));
 
       recipes.push(
-        ...(await api.recipes.getRandom(16 - recipes.length)).recipes
+        ...(await api.recipes.getRandom(recipesQty - recipes.length)).recipes
       );
 
       recipesAndStars = recipes.map((recipe) => [
@@ -53,7 +55,7 @@
 </script>
 
 {#if recipesAndStars}
-  <Splide aria-label="My Favorite Images" {options}>
+  <Splide aria-label="Recipes" {options}>
     {#each recipesAndStars as [recipe, stars], i}
       <SplideSlide>
         <div class="is-flex">
@@ -71,115 +73,11 @@
     {/each}
   </Splide>
 {:else}
-  <div class="section skeleton">
-    <div class="columns">
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64" />
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <br />
-                  <br />
-                  <br />
-                </p>
-              </div>
-              <nav class="level is-mobile">
-                <div class="level-left" />
-              </nav>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns">
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="columns">
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column">
-        <article class="message">
-          <div class="message-header">
-            <p />
-          </div>
-          <div class="message-body">
-            <p />
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
+  <Splide aria-label="Loading" {options}>
+    {#each new Array(recipesQty).fill(null) as e, i}
+      <SplideSlide>
+        <SkeletonCard className="px-2 mx-3 my-6" />
+      </SplideSlide>
+    {/each}
+  </Splide>
 {/if}
-
-<style>
-  .skeleton .message-header {
-    background-color: #e2e2e2;
-    animation: loading 0.5s infinite alternate;
-  }
-
-  @keyframes loading {
-    from {
-      background-color: #b8b3b3;
-    }
-    to {
-      background-color: hsl(0, 5%, 78%);
-    }
-  }
-</style>
