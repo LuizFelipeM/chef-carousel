@@ -35,6 +35,7 @@
     "@splidejs/svelte-splide": "^0.2.9",
     "lodash": "^4.17.21",
     "single-spa-svelte": "^2.1.1",
-    "sirv-cli": "^1.0.14"
+    "sirv-cli": "^1.0.14",
+    "uuid": "^9.0.1"
   }
 }

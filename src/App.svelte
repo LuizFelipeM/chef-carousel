@@ -6,7 +6,6 @@
   import { api, state, routes } from "@Chef/utility";
   import _ from "lodash";
   import Card from "./components/Card/Card.svelte";
-  import VanillaCard from "./components/VanillaCard/VanillaCard.svelte";
 
   const options = {
     rewind: true,
@@ -58,7 +57,15 @@
     {#each recipesAndStars as [recipe, stars], i}
       <SplideSlide>
         <div class="is-flex">
-          <Card {recipe} {stars} onClick={onClick(recipe)} />
+          <Card
+            className="px-2 mx-3 my-6"
+            title={recipe?.title}
+            image={recipe?.image}
+            onClick={onClick(recipe)}
+            summary={recipe?.summary}
+            tags={recipe?.dishTypes?.splice(0, 2)}
+            {stars}
+          />
         </div>
       </SplideSlide>
     {/each}
@@ -160,16 +167,6 @@
     </div>
   </div>
 {/if}
-
-<VanillaCard
-  className="px-2 mx-3 my-6"
-  title="Lemon Drop Jello Shots"
-  image="https://spoonacular.com/recipeImages/649625-556x370.jpg"
-  onClick={() => console.log("click")}
-  stars={new Array(5).fill("fa-solid fa-star")}
-  summary="Lemon Drop Jello Shots is a <b>gluten free, dairy free, and fodmap friendly</b> side dish. This recipe serves 4. One serving contains <b>177 calories</b>, <b>4g of protein</b>, and <b>1g of fat</b>. For <b>$1.32 per serving</b>, this recipe <b>covers 8%</b> of your daily requirements of vitamins and minerals. 4 people were glad they tried this recipe. It is brought to you by Foodista. A mixture of lemon vodka, lemon jello, sugar, and a handful of other ingredients are all it takes to make this recipe so tasty. From preparation to the plate, this recipe takes roughly <b>45 minutes</b>. All things considered, we decided this recipe <b>deserves a spoonacular score of 35%</b>. This score is rather bad. <a href='https://spoonacular.com/recipes/lemon-cake-jello-shots-959266'>Lemon Cake Jello Shots</a>, <a href='https://spoonacular.com/recipes/lemon-drop-martini-jelly-shots-53439'>Lemon Drop Martini Jelly Shots</a>, and <a href='https://spoonacular.com/recipes/margarita-jello-shots-of-the-jello-masters-147346'>Margarita Jello Shots of the Jello Masters</a> are very similar to this recipe."
-  tags={["side dish"]}
-/>
 
 <style>
   .skeleton .message-header {
