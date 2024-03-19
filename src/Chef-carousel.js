@@ -6,11 +6,9 @@ const svelteLifecycles = singleSpaSvelte({
 });
 
 export let mountParcel = undefined
-export const bootstrap = [
-  (props) => {
-    mountParcel = props.mountParcel
-    return Promise.resolve()
-  }
-]
+export const bootstrap = (props) => {
+  mountParcel = props.mountParcel
+  return Promise.resolve()
+}
 
 export const { mount, unmount } = svelteLifecycles;
