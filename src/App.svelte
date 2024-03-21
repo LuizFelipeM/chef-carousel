@@ -12,6 +12,12 @@
   const options = {
     rewind: true,
     perPage: 4,
+    breakpoints: {
+      640: {
+        perPage: 1,
+        fixedHeight: "574px",
+      },
+    },
   };
 
   let recipesAndStars = undefined;
