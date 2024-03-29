@@ -26,8 +26,9 @@
     try {
       let recipes = [];
 
-      if (recipe)
-        recipes.push(...(await api.recipes.getSimilar(recipe.id, recipesQty)));
+      // Similar recipes isn't working properly
+      // if (recipe)
+      //   recipes.push(...(await api.recipes.getSimilar(recipe.id, recipesQty)));
 
       recipes.push(
         ...(await api.recipes.getRandom(recipesQty - recipes.length)).recipes
