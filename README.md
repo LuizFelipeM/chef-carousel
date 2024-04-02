@@ -8,6 +8,8 @@
     Chef Carousel - Single-SPA Application
 </h1>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5bde504-0091-43da-b261-8975fc643385/deploy-status)](https://app.netlify.com/sites/chef-carousel/deploys)
+
 This project was created to learn a set of [techonologies](#technologies). They are implemented just for fun in a recipes search website called Chef.
 
 This repository is the Single-SPA Application responsible for providing a carousel of recipes and not meant to be used as a standalone application. It's used in the [Chef-home](https://github.com/LuizFelipeM/chef-home) and [Chef-recipe](https://github.com/LuizFelipeM/chef-recipe) applications to provide recipe options in these pages. It utilizes [Chef-styleguide](https://github.com/LuizFelipeM/chef-styleguide) extensively due to its dependency on the Card and Card Skeleton components in the styleguide.
