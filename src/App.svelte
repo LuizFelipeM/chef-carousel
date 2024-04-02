@@ -37,7 +37,7 @@
       recipesAndStars = recipes.map((recipe) => [
         recipe,
         new Array(5).fill(null).map((_, i, arr) => {
-          const score = recipe.spoonacularScore / 100;
+          const score = recipe?.spoonacularScore / 100;
           return i + 1 < arr.length * score
             ? "fa-solid fa-star"
             : score % 1 >= 0.5
